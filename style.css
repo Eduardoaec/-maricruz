@@ -1,0 +1,126 @@
+/* Reset básico */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  overflow: hidden;
+
+  /* Fondo rosa bonito */
+  background: radial-gradient(circle at top, #ffd1e8 0%, #ff7ab8 35%, #ff4aa0 70%, #ff2b86 100%);
+}
+
+/* Capa para corazones y viajes */
+.floating-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Tarjeta principal */
+.card {
+  position: relative;
+  z-index: 2;
+  width: min(880px, 92vw);
+  margin: 10vh auto 0;
+  padding: 28px 22px;
+  text-align: center;
+
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.35);
+  box-shadow: 0 20px 70px rgba(0,0,0,0.22);
+}
+
+.badge {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.35);
+  border: 1px solid rgba(255,255,255,0.45);
+  font-weight: 600;
+}
+
+/* Texto neón */
+.neon {
+  margin: 10px 0 8px;
+  font-size: clamp(28px, 5vw, 54px);
+  letter-spacing: 0.5px;
+  color: #eaffff;
+  text-shadow:
+    0 0 6px rgba(0, 255, 255, 0.8),
+    0 0 16px rgba(0, 255, 255, 0.8),
+    0 0 32px rgba(0, 255, 255, 0.7),
+    0 0 60px rgba(255, 255, 255, 0.5);
+  animation: neonPulse 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse {
+  from { filter: brightness(1); }
+  to   { filter: brightness(1.25); }
+}
+
+.subtitle {
+  margin: 0 0 18px;
+  font-size: clamp(16px, 2.8vw, 22px);
+  color: rgba(255,255,255,0.95);
+  text-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 10px 0 18px;
+}
+
+.chip {
+  padding: 10px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.28);
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Botón */
+.btn {
+  border: none;
+  border-radius: 14px;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #ff2b86, #ff66b2);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+.btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+.btn:active { transform: translateY(0px) scale(0.98); }
+
+.hint {
+  margin: 12px 0 0;
+  color: rgba(255,255,255,0.9);
+}
+
+/* Elementos flotantes (corazones y viajes) */
+.float {
+  position: absolute;
+  left: var(--x);
+  top: 110%;
+  font-size: var(--size);
+  opacity: var(--o);
+  transform: translateY(0) rotate(var(--r));
+  animation: rise var(--dur) linear infinite;
+  filter: drop-shadow(0 10px 14px rgba(0,0,0,0.18));
+}
+
+@keyframes rise {
+  from { transform: translateY(0) rotate(var(--r)); }
+  to   { transform: translateY(-140vh) rotate(calc(var(--r) + 180deg)); }
+}
