@@ -1,33 +1,398 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Maricruz Eugenio Crispin</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Maricruz</title>
+<meta name="description" content="Felicitación de cumpleaños interactiva para Maricruz">
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+  background:radial-gradient(circle at top,#ff9acb 0%,#ff6fb5 40%,#ff4f9a 100%);
+  color:#fff;
+  font-family:Arial,sans-serif;
+  text-align:center;
+  overflow-y:auto;
+  overflow-x:hidden;
+  position:relative;
+}
+h1{
+  font-size:clamp(2.5rem,8vw,5.5rem);
+  margin:10px 0;
+  color:#fff;
+  text-transform:uppercase;
+  text-shadow:
+    0 0 5px #ff00de,
+    0 0 10px #ff00de,
+    0 0 20px #ff00de,
+    0 0 40px #ff00de,
+    0 0 80px #ff00de;
+  animation:glow 1.4s infinite alternate;
+  z-index:2;
+}
+h2{
+  margin:6px 0 15px;
+  color:#ffe4ff;
+  text-shadow:
+    0 0 5px #ffe4ff,
+    0 0 10px #ffe4ff,
+    0 0 20px #ffe4ff,
+    0 0 40px #ffe4ff;
+  z-index:2;
+}
+@keyframes glow{
+  from{
+    text-shadow:
+      0 0 5px #ff00de,
+      0 0 10px #ff00de,
+      0 0 20px #ff00de,
+      0 0 40px #ff00de;
+  }
+  to{
+    text-shadow:
+      0 0 10px #ff00de,
+      0 0 20px #ff00de,
+      0 0 40px #ff00de,
+      0 0 80px #ff00de,
+      0 0 120px #ff00de;
+  }
+}
+.photo-box{
+  position:relative;
+  z-index:2;
+  padding:8px;
+  border-radius:28px;
+  background:linear-gradient(45deg,#ff00de,#ffb6ff,#ffe600,#ff6a00,#ff00de);
+  background-size:300% 300%;
+  animation:borderMove 4s linear infinite;
+  box-shadow:0 0 35px rgba(255,0,222,.65);
+}
+@keyframes borderMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+img{
+  width:min(320px,80vw);
+  display:block;
+  border-radius:22px;
+  animation:zoomPhoto 4s ease-in-out infinite;
+}
+@keyframes zoomPhoto{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.05)}
+}
+p{
+  max-width:700px;
+  padding:18px 22px;
+  margin:14px 0 8px;
+  z-index:2;
+  background:rgba(255,255,255,.12);
+  border-radius:18px;
+  backdrop-filter:blur(6px);
+}
+.buttons{
+  z-index:2;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:10px;
+}
+button{
+  padding:12px 22px;
+  border:none;
+  border-radius:999px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  color:white;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+button:hover{
+  transform:scale(1.06);
+  box-shadow:0 0 20px rgba(255,255,255,.3);
+}
+.btn1{background:linear-gradient(45deg,#ff00de,#ff7a00)}
+.btn2{background:linear-gradient(45deg,#ff7eb3,#ffb6ff)}
+.btn3{background:linear-gradient(45deg,#ff4d6d,#ffd166)}
+#sorpresa{
+  display:none;
+  margin-top:16px;
+  font-size:20px;
+  color:#ffe082;
+  text-shadow:0 0 8px #ffeb3b;
+  z-index:2;
+}
+.star{
+  position:fixed;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  box-shadow:0 0 8px white;
+  animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{
+  from{opacity:.3;transform:scale(1)}
+  to{opacity:1;transform:scale(1.8)}
+}
+.balloon{
+  position:fixed;
+  bottom:-120px;
+  width:60px;
+  height:80px;
+  border-radius:50%;
+  animation:floatUp linear infinite;
+  opacity:.9;
+}
+.balloon::after{
+  content:"";
+  position:absolute;
+  width:2px;
+  height:70px;
+  background:white;
+  left:50%;
+  top:80px;
+  transform:translateX(-50%);
+}
+@keyframes floatUp{
+  0%{transform:translateY(0)}
+  100%{transform:translateY(-120vh)}
+}
+.confetti{
+  position:fixed;
+  width:10px;
+  height:16px;
+  top:-20px;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  0%{transform:translateY(-10vh) rotate(0deg)}
+  100%{transform:translateY(110vh) rotate(720deg)}
+}
+.firework{
+  position:fixed;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:white;
+  box-shadow:0 0 10px white;
+  animation:explode 1s ease-out forwards;
+}
+@keyframes explode{
+  0%{transform:translate(0,0);opacity:1}
+  100%{transform:translate(var(--x),var(--y));opacity:0}
+}
+.heart{
+  position:fixed;
+  bottom:-30px;
+  font-size:22px;
+  animation:heartUp linear forwards;
+  pointer-events:none;
+}
+@keyframes heartUp{
+  0%{transform:translateY(0) scale(1);opacity:1}
+  100%{transform:translateY(-110vh) scale(1.5);opacity:0}
+}
+.cake{
+  position:relative;
+  width:180px;
+  height:160px;
+  margin-top:18px;
+  z-index:2;
+}
+.layer1,.layer2,.layer3{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  border-radius:14px;
+}
+.layer1{bottom:0;width:180px;height:52px;background:#ff8fab}
+.layer2{bottom:42px;width:136px;height:44px;background:#ffd166}
+.layer3{bottom:80px;width:94px;height:36px;background:#b388ff}
+.candle{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:112px;
+  width:12px;
+  height:35px;
+  border-radius:6px;
+  background:repeating-linear-gradient(45deg,white 0 4px,#ff00de 4px 8px);
+}
+.flame{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:141px;
+  width:18px;
+  height:25px;
+  border-radius:50%;
+  background:radial-gradient(circle,#fff8b0 0%,#ff9800 70%,transparent 72%);
+  filter:drop-shadow(0 0 10px #ffd000);
+  animation:flicker .3s infinite alternate;
+}
+@keyframes flicker{
+  from{transform:translateX(-50%) scale(1)}
+  to{transform:translateX(-50%) scale(1.12)}
+}
+.party-text{
+  position:fixed;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:clamp(1rem,3vw,1.4rem);
+  color:#fff176;
+  text-shadow:0 0 10px #fff176;
+  z-index:2;
+  animation:bounce 2s infinite;
+}
+@keyframes bounce{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  50%{transform:translateX(-50%) translateY(-6px)}
+}
+audio{display:none}
+
+@media (max-width:480px){
+  .balloon{width:48px;height:68px}
+  p{padding:14px 16px;font-size:.95rem}
+}
+</style>
 </head>
-
 <body>
-  <!-- Fondo animado -->
-  <div class="floating-layer" aria-hidden="true"></div>
 
-  <main class="card">
-    <p class="badge">💖 Página especial 💖</p>
+<div class="party-text">🎉 Happy Birthday Maricruz 🎉</div>
 
-    <h1 class="neon">Maricruz Eugenio Crispin</h1>
-    <p class="subtitle">Eres la mejor ✨</p>
+<h1>HAPPY BIRTHDAY</h1>
+<h2>Happy birthday Maricruz Eugenio Crispin</h2>
 
-    <div class="chips">
-      <span class="chip">✈️ Viajes</span>
-      <span class="chip">🧳 Aventuras</span>
-      <span class="chip">🌍 Sueños</span>
-      <span class="chip">📍 Momentos</span>
-    </div>
+<div class="photo-box">
+  <img src="maricruz.jpeg" alt="Foto de Maricruz sonriendo en su cumpleaños">
+</div>
 
-    <button id="btnLove" class="btn">Mandar amor 💘</button>
-    <p class="hint">Tip: dale clic varias veces 😄</p>
-  </main>
+<p>
+Maricruz, deseo que tu día esté lleno de amor, alegría y momentos inolvidables.
+Que cada deseo que pidas hoy se convierta en realidad. 🎉🎂
+</p>
 
-  <script src="script.js"></script>
+<div class="cake">
+  <div class="layer1"></div>
+  <div class="layer2"></div>
+  <div class="layer3"></div>
+  <div class="candle"></div>
+  <div class="flame"></div>
+</div>
+
+<div class="buttons">
+  <button class="btn1" type="button" onclick="mostrarSorpresa()">Mensaje sorpresa</button>
+  <button class="btn2" type="button" onclick="reproducirMusica()">Reproducir música</button>
+  <button class="btn3" type="button" onclick="fireworks()">Más fiesta</button>
+</div>
+
+<div id="sorpresa">
+  Maricruz, eres una persona increíble y muy especial para mí. 💖<br>
+  Gracias por tu sonrisa, tu cariño y todos los momentos que compartimos.
+  Que hoy y siempre se cumplan tus sueños. ✨
+</div>
+
+<audio id="musica" loop>
+  <source src="cumpleanos.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const colors=["#ff4d6d","#ffd166","#ff9acb","#ffb6ff","#c77dff","#ffffff","#ff00de","#ff8fab"];
+
+for(let i=0;i<70;i++){
+  let s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  s.style.animationDuration=(Math.random()*2+1)+"s";
+  document.body.appendChild(s);
+}
+
+for(let i=0;i<12;i++){
+  let b=document.createElement("div");
+  b.className="balloon";
+  b.style.left=Math.random()*100+"vw";
+  b.style.background=colors[Math.floor(Math.random()*colors.length)];
+  b.style.animationDuration=(Math.random()*5+7)+"s";
+  b.style.animationDelay=(Math.random()*4)+"s";
+  document.body.appendChild(b);
+}
+
+function crearConfeti(cantidad=60){
+  for(let i=0;i<cantidad;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=colors[Math.floor(Math.random()*colors.length)];
+    c.style.animationDuration=(Math.random()*3+3)+"s";
+    c.style.animationDelay=(Math.random()*2)+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),7000);
+  }
+}
+crearConfeti(80);
+
+function fireworks(){
+  for(let round=0;round<3;round++){
+    setTimeout(()=>{
+      let centerX=Math.random()*window.innerWidth;
+      let centerY=Math.random()*(window.innerHeight*0.5)+40;
+      for(let i=0;i<24;i++){
+        let f=document.createElement("div");
+        f.className="firework";
+        f.style.left=centerX+"px";
+        f.style.top=centerY+"px";
+        f.style.background=colors[Math.floor(Math.random()*colors.length)];
+        let angle=(Math.PI*2*i)/24;
+        let distance=Math.random()*80+40;
+        f.style.setProperty("--x",Math.cos(angle)*distance+"px");
+        f.style.setProperty("--y",Math.sin(angle)*distance+"px");
+        document.body.appendChild(f);
+        setTimeout(()=>f.remove(),1000);
+      }
+    },round*350);
+  }
+}
+setInterval(fireworks,4000);
+
+function crearCorazon(){
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML=Math.random()>0.5?"💖":"💜";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(Math.random()*3+4)+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),7000);
+}
+setInterval(crearCorazon,900);
+
+function mostrarSorpresa(){
+  const sorpresa=document.getElementById("sorpresa");
+  sorpresa.style.display="block";
+  crearConfeti(60);
+  fireworks();
+  sorpresa.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function reproducirMusica(){
+  const audio=document.getElementById("musica");
+  if(audio.paused){
+    audio.play().catch(()=>{
+      alert("Pon tu archivo de música con el nombre cumpleanos.mp3 en la misma carpeta.");
+    });
+  }
+}
+</script>
+
 </body>
 </html>
